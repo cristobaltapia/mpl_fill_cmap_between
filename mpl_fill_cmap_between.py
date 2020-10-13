@@ -71,7 +71,7 @@ def fill_cmap_between_x(y, x, x0, ax, alpha=None, cmap=None, vmin=None, vmax=Non
 
 
 def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
-                      kw_line_1=None, kw_line_2=None):
+                      kw_line_1=None, kw_line_2=None, angle=None):
     """
     x : arraylike
             x-coordinates
@@ -101,6 +101,10 @@ def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
     if kw_line_2 is None:
         kw_line_2 = dict(color='none')
 
+    if angle is not None:
+        a = np.deg2rad(-angle)
+        rot = np.array([[np.cos(a), -np.sin(a)], [np.sin(a), np.cos(a)]])
+
     y0 = np.zeros(len(y))
 
     # Generate Quad mesh coordinates
@@ -112,6 +116,9 @@ def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
     coords_y[1::2] = y
 
     coords = np.column_stack((coords_x, coords_y))
+
+    if angle is not None:
+        coords = coords @ rot
 
     Nx = x.size
 
