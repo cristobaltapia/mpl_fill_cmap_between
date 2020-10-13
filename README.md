@@ -18,9 +18,7 @@ y = x**2 - 40
 fig = plt.figure(figsize=(4.8, 2.0))
 ax = fig.add_subplot(111)
 
-fill_cmap_between(x, y, 0, ax=ax)
-
-ax.set_aspect("auto")
+fill_cmap_between(x, y, 0, ax=ax, cmap="viridis")
 
 fig.tight_layout()
 fig.savefig("example.png", dpi=300)
