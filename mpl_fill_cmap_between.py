@@ -2,6 +2,7 @@ from matplotlib.cm import get_cmap
 from matplotlib.patches import Polygon
 import numpy as np
 from matplotlib.collections import QuadMesh
+from numpy import cos, sin
 
 
 def fill_cmap_between_x(y, x, x0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
@@ -71,7 +72,7 @@ def fill_cmap_between_x(y, x, x0, ax, alpha=None, cmap=None, vmin=None, vmax=Non
 
 
 def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
-                      kw_line_1=None, kw_line_2=None, angle=None):
+                      kw_line_1=None, kw_line_2=None, angle=None, origin=None):
     """
     x : arraylike
             x-coordinates
@@ -102,23 +103,36 @@ def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
         kw_line_2 = dict(color='none')
 
     if angle is not None:
-        a = np.deg2rad(-angle)
-        rot = np.array([[np.cos(a), -np.sin(a)], [np.sin(a), np.cos(a)]])
+        a = np.deg2rad(angle)
+        if origin is None:
+            origin = np.array([0, 0])
+
+        ux = origin[0]
+        uy = origin[1]
+
+        rot = np.array([
+            [cos(a), -sin(a), ux],
+            [sin(a), cos(a), uy],
+            [0, 0, 1],
+        ])
 
     y0 = np.zeros(len(y))
 
     # Generate Quad mesh coordinates
     coords_x = np.empty((2 * x.size), dtype=x.dtype)
     coords_y = np.empty((2 * y.size), dtype=y.dtype)
+    coords_z = np.ones((2 * y.size), dtype=y.dtype)
     coords_x[0::2] = x
     coords_x[1::2] = x
     coords_y[0::2] = y0
     coords_y[1::2] = y
 
-    coords = np.column_stack((coords_x, coords_y))
+    coords = np.row_stack((coords_x, coords_y, coords_z))
 
     if angle is not None:
-        coords = coords @ rot
+        coords = rot @ coords
+
+    coords = coords.T[:, :2]
 
     Nx = x.size
 
