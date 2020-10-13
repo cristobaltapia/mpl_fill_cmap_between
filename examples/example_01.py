@@ -1,13 +1,3 @@
-# mpl_fill_cmap_between
-
-Create fill_between-like plots filled with any matplotlib's colormap.
-
-
-## Examples
-
-The function `fill_cmap_between` (and also the function `fill_cmap_between_x`) can be used in the following manner:
-
-```python
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_fill_cmap_between import fill_cmap_between
@@ -24,7 +14,3 @@ ax.set_aspect("auto")
 
 fig.tight_layout()
 fig.savefig("example.png", dpi=300)
-```
-
-![Example](examples/example.png)
-

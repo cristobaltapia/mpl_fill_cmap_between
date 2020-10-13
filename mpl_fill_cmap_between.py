@@ -67,6 +67,7 @@ def fill_cmap_between_x(y, x, x0, ax, cmap=get_cmap("viridis"), c_min=None, c_ma
 
     return ax
 
+
 def fill_cmap_between(x, y, y0, ax, cmap=get_cmap("viridis"), c_min=None, c_max=None):
     """
     x : arraylike

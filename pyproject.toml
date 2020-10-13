@@ -1,21 +1,23 @@
 [tool.poetry]
-name = "fill_cmap_between"
+name = "mpl_fill_cmap_between"
 version = "0.1.0"
 description = "Create fillbetween plots filled with any colormap"
 authors = ["Cristóbal Tapia Camú <crtapia@gmail.com>"]
 license = "MIT"
 keywords = ["matplotlib", "fill_between"]
-
-[tool.poetry.dependencies]
-python = "^3.6"
-matplotlib = "^3.0.0"
+readme = "README.md"
 
 exclude = [
     ".gitignore"
 ]
+
 packages = [
-    {include = "fill_cmap_between.py"}
+    {include = "mpl_fill_cmap_between.py"}
 ]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+matplotlib = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 
