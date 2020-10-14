@@ -6,7 +6,7 @@ from numpy import cos, sin
 
 
 def fill_cmap_between_x(y, x, x0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
-                      kw_line_1=None, kw_line_2=None):
+                        kw_line_1=None, kw_line_2=None, **kwargs):
     """
     y : arraylike
         y-coordinates
@@ -55,7 +55,7 @@ def fill_cmap_between_x(y, x, x0, ax, alpha=None, cmap=None, vmin=None, vmax=Non
     vals[0::2] = x - x0
     vals[1::2] = x - x0
 
-    collection = QuadMesh(1, Nx - 1, coordinates=coords, shading="gouraud")
+    collection = QuadMesh(1, Nx - 1, coordinates=coords, shading="gouraud", **kwargs)
 
     collection.set_array(vals)
     collection.set_alpha(alpha)
@@ -72,7 +72,7 @@ def fill_cmap_between_x(y, x, x0, ax, alpha=None, cmap=None, vmin=None, vmax=Non
 
 
 def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
-                      kw_line_1=None, kw_line_2=None, angle=None, origin=None):
+                      kw_line_1=None, kw_line_2=None, angle=None, origin=None, **kwargs):
     """
     x : arraylike
             x-coordinates
@@ -141,7 +141,7 @@ def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
     vals[0::2] = y - y0
     vals[1::2] = y - y0
 
-    collection = QuadMesh(1, Nx - 1, coordinates=coords, shading="gouraud")
+    collection = QuadMesh(1, Nx - 1, coordinates=coords, shading="gouraud", **kwargs)
 
     collection.set_array(vals)
     collection.set_alpha(alpha)
