@@ -36,7 +36,7 @@ def fill_cmap_between_x(y, x, x0, ax, alpha=None, cmap=None, vmin=None, vmax=Non
     if kw_line_2 is None:
         kw_line_2 = dict(color='none')
 
-    x0 = np.zeros(len(x))
+    x0 = np.ones(len(x)) * x0
 
     # Generate Quad mesh coordinates
     coords_x = np.empty((2 * x.size), dtype=x.dtype)
@@ -116,7 +116,7 @@ def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
             [0, 0, 1],
         ])
 
-    y0 = np.zeros(len(y))
+    y0 = np.ones(len(y)) * y0
 
     # Generate Quad mesh coordinates
     coords_x = np.empty((2 * x.size), dtype=x.dtype)
