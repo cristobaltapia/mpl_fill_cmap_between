@@ -117,6 +117,7 @@ def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
         ])
 
     y0 = np.ones(len(y)) * y0
+    x0 = x[:]
 
     # Generate Quad mesh coordinates
     coords_x = np.empty((2 * x.size), dtype=x.dtype)
@@ -151,7 +152,12 @@ def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
 
     ax.add_collection(collection)
 
+    if angle is not None:
+        z = np.ones(len(x))
+        x0, y0, _ = rot @ np.row_stack((x, y0, z))
+        x, y, _ = rot @ np.row_stack((x, y, z))
+
     ax.plot(x, y, **kw_line_1)
-    ax.plot([x[0], x[-1]], [y0, y0], **kw_line_2)
+    ax.plot(x0, y0, **kw_line_2)
 
     return ax
