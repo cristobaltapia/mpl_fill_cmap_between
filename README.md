@@ -2,6 +2,12 @@
 
 Create fill_between-like plots filled with any matplotlib's colormap.
 
+## Install
+
+```bash
+pip install mpl_fill_cmap_between
+```
+
 
 ## Examples
 
