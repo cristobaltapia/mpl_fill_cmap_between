@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mpl_fill_cmap_between"
-version = "0.2.1"
+version = "0.3.0"
 description = "Create fillbetween plots filled with any colormap"
 authors = ["Cristóbal Tapia Camú <crtapia@gmail.com>"]
 license = "MIT"
