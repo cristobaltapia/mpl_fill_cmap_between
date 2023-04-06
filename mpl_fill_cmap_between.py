@@ -133,16 +133,18 @@ def fill_cmap_between(x, y, y0, ax, alpha=None, cmap=None, vmin=None, vmax=None,
     if angle is not None:
         coords = rot @ coords
 
-    coords = coords.T[:, :2]
-
     Nx = x.size
+    w, h = 1, Nx - 1
+
+    coords = coords.T[:, :2]
+    coords = np.asarray(coords, np.float64).reshape((h + 1, w + 1, 2))
 
     # Values for the colormap
     vals = np.empty((2 * Nx))
     vals[0::2] = y - y0
     vals[1::2] = y - y0
 
-    collection = QuadMesh(1, Nx - 1, coordinates=coords, shading="gouraud", **kwargs)
+    collection = QuadMesh(coordinates=coords, shading="gouraud", **kwargs)
 
     collection.set_array(vals)
     collection.set_alpha(alpha)
