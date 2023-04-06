@@ -49,13 +49,15 @@ def fill_cmap_between_x(y, x, x0, ax, alpha=None, cmap=None, vmin=None, vmax=Non
     coords = np.column_stack((coords_x, coords_y))
 
     Nx = x.size
+    w, h = 1, Nx - 1
+    coords = np.asarray(coords, np.float64).reshape((h + 1, w + 1, 2))
 
     # Values for the colormap
     vals = np.empty((2 * Nx))
     vals[0::2] = x - x0
     vals[1::2] = x - x0
 
-    collection = QuadMesh(1, Nx - 1, coordinates=coords, shading="gouraud", **kwargs)
+    collection = QuadMesh(coordinates=coords, shading="gouraud", **kwargs)
 
     collection.set_array(vals)
     collection.set_alpha(alpha)
